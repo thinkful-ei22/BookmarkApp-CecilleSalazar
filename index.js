@@ -8,54 +8,83 @@ const STORE = {
   ]
 }
 
-function displayStore(store) {
-  const titles = store.items.map(item =>
-      item.title
-  );
-  console.log(titles);
+function render() {
+  return `
+  <!--NavBar Dropdown-->
 
-  const storeHTML = titles.map(item => {
-    return `
-      <ul class="bookmarksList">
-        <li>${item}</li>
-        <button class="deleteButton" type="submit">Delete Bookmark</button>
-      </ul>`
-  });
+      <section class="navContent">
+        <div class="navbar">
+          <h2 class="logo">myBookmark</h2>
+            <div class="dropdown">
+              <button class="dropbtn">Minimum Rating</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a class="myDrowpdownText" href="#">1 Star</a>
+                  <a class="myDrowpdownText" href="#">2 Star</a>
+                  <a class="myDrowpdownText" href="#">3 Star</a>
+                  <a class="myDrowpdownText" href="#">4 Star</a>
+                  <a class="myDrowpdownText" href="#">5 Star</a>
+                </div>
+            </div>
+        </div>
+      </section>
 
-$('.container').html(storeHTML);
 
+      <!--                Contains Form for Adding a Bookmark                  -->
+      <section class="createBookmark">
+        <form class="addBookmark">
+
+          <button class="addBookmarkButton">Add Bookmark</button>
+
+          <label for="addBookmark">Add Bookmark</label>
+            <input type="text" class="userTextInput" placeholder="e.g., Youtube">
+            <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
+            <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
+
+        </form>
+  <!--Review Radio Buttons-->
+        <form class="submitReview">
+            <div class="radioButtons">
+              <input type="radio" class="starReviewChoices" name="stars" value="1star">
+              <label for="starChoice1">1 star</label>
+
+              <input type="radio" class="starReviewChoices" name="stars" value="2stars">
+              <label for="starChoice2">2 stars</label>
+
+              <input type="radio" class="starReviewChoices" name="stars" value="3stars">
+              <label for="starChoice3">3 stars</label>
+
+              <input type="radio" class="starReviewChoices" name="stars" value="4stars">
+              <label for="starChoice4">4 stars</label>
+
+              <input type="radio" class="starReviewChoices" name="stars" value="5stars">
+              <label for="starChoice5">5 stars</label>
+            </div>
+
+            <button class="submitReviewButton" type="submit">Submit</button>
+        </form>
+        ${renderItems(STORE.items)}
+      </section>`
 }
 
-const renderStore = function() {
-  displayStore(STORE);
+function renderItems(items) {
+  return `
+    <ul class="bookmarksList">
+      ${items.map(item => `
+        <div class="indivBookmark">
+          <li>${item.title}</li>
+          <button class="deleteButton" type="submit">Delete Bookmark</button>
+        </div>
+      `).join("\n")}
+    </ul>`;
 }
 
-
-
-//DROPDOWN FUNCTION
-
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+function handlersSetup() {
+  // handlers go here!
+  display();
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    let dropdowns = document.getElementsByClassName("dropdown-content");
-    let i;
-    for (i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
+function display() {
+  $('.container').html(render());
 }
 
-const handleAll = function() {
-  renderStore();
-}
-
-
-$(handleAll)
+$(handlersSetup)
