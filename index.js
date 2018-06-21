@@ -99,3 +99,6 @@ function display() {
 }
 
 $(handlersSetup)
+// For testing only
+window.STORE = STORE;
+window.display = display;
