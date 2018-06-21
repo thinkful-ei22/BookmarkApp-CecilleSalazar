@@ -5,7 +5,8 @@ const STORE = {
     {title: 'Youtube', address: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5},
     {title: 'Pandora', address: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5},
     {title: 'NPR', address: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5},
-  ]
+  ],
+  displayBookmarkForm: false,
 }
 
 function render() {
@@ -31,9 +32,11 @@ function render() {
 
       <!--                Contains Form for Adding a Bookmark                  -->
       <section class="createBookmark">
-        <form class="addBookmark">
+        <div class="addBookmarkButton">
+          <button>Add Bookmark</button>
+        </div>
 
-          <button class="addBookmarkButton">Add Bookmark</button>
+        <form class="addBookmark" style="${STORE.displayBookmarkForm ? '' : 'display: none'}">
 
           <label for="addBookmark">Add Bookmark</label>
             <input type="text" class="userTextInput" placeholder="e.g., Youtube">
@@ -76,6 +79,14 @@ function renderItems(items) {
         </div>
       `).join("\n")}
     </ul>`;
+}
+
+function handleAddBookmarkButtonClicked() {
+  $('.addBookmarkButton').on('click', event => {
+    //Put Code Here That Pushes the CreateBookmark Section Class into html
+
+
+  })
 }
 
 function handlersSetup() {
