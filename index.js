@@ -64,14 +64,15 @@ function render() {
 }
 
 function renderAddBookmarkForm() {
-  return `
-    <form class="addBookmark" style="${STORE.displayBookmarkForm ? '' : 'display: none'}">
+  return STORE.displayBookmarkForm ? `
+    <form class="addBookmark">
 
       <label for="addBookmark">Add Bookmark</label>
         <input type="text" class="userTextInput" placeholder="e.g., Youtube">
         <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
         <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
-    </form>`;
+    </form>`
+    : '';
 }
 
 function renderItems(items) {
