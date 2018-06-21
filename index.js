@@ -36,14 +36,8 @@ function render() {
           <button>Add Bookmark</button>
         </div>
 
-        <form class="addBookmark" style="${STORE.displayBookmarkForm ? '' : 'display: none'}">
+        ${renderAddBookmarkForm()}
 
-          <label for="addBookmark">Add Bookmark</label>
-            <input type="text" class="userTextInput" placeholder="e.g., Youtube">
-            <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
-            <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
-
-        </form>
   <!--Review Radio Buttons-->
         <form class="submitReview">
             <div class="radioButtons">
@@ -67,6 +61,17 @@ function render() {
         </form>
         ${renderItems(STORE.items)}
       </section>`
+}
+
+function renderAddBookmarkForm() {
+  return `
+    <form class="addBookmark" style="${STORE.displayBookmarkForm ? '' : 'display: none'}">
+
+      <label for="addBookmark">Add Bookmark</label>
+        <input type="text" class="userTextInput" placeholder="e.g., Youtube">
+        <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
+        <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
+    </form>`;
 }
 
 function renderItems(items) {
