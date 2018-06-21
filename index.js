@@ -1,6 +1,6 @@
 'use strict'
 
-const store = {
+const STORE = {
   items: [
     {title: 'Youtube', address: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5},
     {title: 'Pandora', address: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5},
@@ -8,11 +8,27 @@ const store = {
   ]
 }
 
-const render = function(items) {
-  console.log(items);
+function displayStore(store) {
+  const titles = store.items.map(item =>
+      item.title
+  );
+  console.log(titles);
+
+  const storeHTML = titles.map(item => {
+    return `
+      <ul class="bookmarksList">
+        <li>${item}</li>
+        <button class="deleteButton" type="submit">Delete Bookmark</button>
+      </ul>`
+  });
+
+$('.container').html(storeHTML);
+
 }
 
-render(store.items);
+const renderStore = function() {
+  displayStore(STORE);
+}
 
 
 
@@ -36,3 +52,10 @@ window.onclick = function(event) {
     }
   }
 }
+
+const handleAll = function() {
+  renderStore();
+}
+
+
+$(handleAll)
