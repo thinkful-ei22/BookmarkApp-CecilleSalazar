@@ -6,14 +6,12 @@
   color: white;
   height: 50px;
   width: 100%;
-  display: inline-block;
-  position: fixed;
+  display: block;
 }
 
 .logo {
   font-size: 20px;
   display: inline-block;
-  position: fixed;
   color: white;
   margin-top: 15px;
   margin-left: 10px;
@@ -69,4 +67,37 @@
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
-/*-----------------------NAV BAR STYLES-------------------------------------*/
+/*------------------------Create a Bookmark Form-----------------------------*/
+
+.addBookmarkButton {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  height: 20px;
+  color: black;
+  display: block;
+}
+
+label {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.userTextInput {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.userUrlInput {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.userDescriptionInput {
+  margin-left: 20px;
+  margin-top: 20px;
+  display: block;
+}
+
+/*--------------------------Submit a Review Form------------------------------*/

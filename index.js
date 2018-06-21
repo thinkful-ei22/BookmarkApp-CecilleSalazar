@@ -8,6 +8,12 @@ const store = {
   ]
 }
 
+const render = function(items) {
+  console.log(items);
+}
+
+render(store.items);
+
 
 
 //DROPDOWN FUNCTION
