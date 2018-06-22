@@ -48,19 +48,19 @@ function renderAddBookmarkForm() {
         <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
 
         <div class="radioButtons">
-          <input type="radio" class="starReviewChoices" name="stars" value="1star">
+          <input type="radio" class="starReviewChoices" name="stars" value="1">
           <label for="starChoice1">1 star</label>
 
-          <input type="radio" class="starReviewChoices" name="stars" value="2stars">
+          <input type="radio" class="starReviewChoices" name="stars" value="2">
           <label for="starChoice2">2 stars</label>
 
-          <input type="radio" class="starReviewChoices" name="stars" value="3stars">
+          <input type="radio" class="starReviewChoices" name="stars" value="3">
           <label for="starChoice3">3 stars</label>
 
-          <input type="radio" class="starReviewChoices" name="stars" value="4stars">
+          <input type="radio" class="starReviewChoices" name="stars" value="4">
           <label for="starChoice4">4 stars</label>
 
-          <input type="radio" class="starReviewChoices" name="stars" value="5stars">
+          <input type="radio" class="starReviewChoices" name="stars" value="5">
           <label for="starChoice5">5 stars</label>
         </div>
 
@@ -95,10 +95,11 @@ function addNewBookmark() {
     const title = $(event.target).find('.userTextInput').val();
     const url = $(event.target).find('.userUrlInput').val();
     const description = $(event.target).find('.userDescriptionInput').val();
-    //Do rating here later
-    let newItem = {title, url, description}
-    console.log(newItem);
+    const rating = $(event.target).find('input:radio[name=stars]:checked').val();
+    let newItem = {title, url, description, rating}
 
+    STORE.items.push(newItem);
+    display();
 
   })
 }
