@@ -64,7 +64,7 @@ function renderAddBookmarkForm() {
           <label for="starChoice5">5 stars</label>
         </div>
 
-        <button class="submitReviewButton" type="submit">Submit</button>
+        <button class="submitNewBookmarkButton" type="submit">Submit</button>
 
     </form>`
     : '';
@@ -90,12 +90,23 @@ function handleAddBookmarkButtonClicked() {
 }
 
 function addNewBookmark() {
-  $('.container').on('change', '.userTextInput', event )
+  $('.container').on('submit', '.addBookmark', event => {
+    event.preventDefault();
+    const title = $(event.target).find('.userTextInput').val();
+    const url = $(event.target).find('.userUrlInput').val();
+    const description = $(event.target).find('.userDescriptionInput').val();
+    //Do rating here later
+    let newItem = {title, url, description}
+    console.log(newItem);
+
+
+  })
 }
 
 function handlersSetup() {
   // handlers go here!
   handleAddBookmarkButtonClicked();
+  addNewBookmark();
   display();
 }
 
