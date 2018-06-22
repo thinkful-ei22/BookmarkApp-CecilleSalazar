@@ -121,9 +121,9 @@ function addNewBookmark() {
 
 function removeBookmark() {
   $('.container').on('click', '.deleteButton', event => {
-
-
-
+  const itemIndex = $(event.target).closest('div.indivBookmark').data('item-index');
+  STORE.items.splice(itemIndex, 1);
+  display();
   })
 }
 
