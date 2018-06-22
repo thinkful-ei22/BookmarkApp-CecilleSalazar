@@ -88,15 +88,15 @@ function renderItems(items) {
 }
 
 function handleAddBookmarkButtonClicked() {
-  $('.addBookmarkButton').on('click', event => {
-    //Put Code Here That Pushes the CreateBookmark Section Class into html
-
-
+  $('.container').on('click', '.addBookmarkButton', event => {
+    STORE.displayBookmarkForm = !STORE.displayBookmarkForm;
+    display();
   })
 }
 
 function handlersSetup() {
   // handlers go here!
+  handleAddBookmarkButtonClicked();
   display();
 }
 
