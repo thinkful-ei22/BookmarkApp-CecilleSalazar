@@ -168,7 +168,6 @@ function createBookmark({title, url, description, rating, expandedView, hide}) {
     throw Error('Url must be more than 4 characters! ')
   }
   if (!url.includes("http") || !url.includes("https")) {
-    console.log(url)
     throw Error('Url must include protocol (http/https)!')
   }
 
