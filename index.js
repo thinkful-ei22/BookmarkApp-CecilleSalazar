@@ -11,8 +11,6 @@ const STORE = {
 
 function render() {
   return `
-  <!--NavBar Dropdown-->
-
       <section class="navContent">
         <div class="navbar">
           <h2 class="logo">myBookmark</h2>
@@ -29,8 +27,6 @@ function render() {
         </div>
       </section>
 
-
-      <!--                Contains Form for Adding a Bookmark                  -->
       <section class="createBookmark">
         <div class="addBookmarkButton">
           <button>Add Bookmark</button>
@@ -38,27 +34,6 @@ function render() {
 
         ${renderAddBookmarkForm()}
 
-  <!--Review Radio Buttons-->
-        <form class="submitReview">
-            <div class="radioButtons">
-              <input type="radio" class="starReviewChoices" name="stars" value="1star">
-              <label for="starChoice1">1 star</label>
-
-              <input type="radio" class="starReviewChoices" name="stars" value="2stars">
-              <label for="starChoice2">2 stars</label>
-
-              <input type="radio" class="starReviewChoices" name="stars" value="3stars">
-              <label for="starChoice3">3 stars</label>
-
-              <input type="radio" class="starReviewChoices" name="stars" value="4stars">
-              <label for="starChoice4">4 stars</label>
-
-              <input type="radio" class="starReviewChoices" name="stars" value="5stars">
-              <label for="starChoice5">5 stars</label>
-            </div>
-
-            <button class="submitReviewButton" type="submit">Submit</button>
-        </form>
         ${renderItems(STORE.items)}
       </section>`
 }
@@ -71,6 +46,26 @@ function renderAddBookmarkForm() {
         <input type="text" class="userTextInput" placeholder="e.g., Youtube">
         <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
         <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
+
+        <div class="radioButtons">
+          <input type="radio" class="starReviewChoices" name="stars" value="1star">
+          <label for="starChoice1">1 star</label>
+
+          <input type="radio" class="starReviewChoices" name="stars" value="2stars">
+          <label for="starChoice2">2 stars</label>
+
+          <input type="radio" class="starReviewChoices" name="stars" value="3stars">
+          <label for="starChoice3">3 stars</label>
+
+          <input type="radio" class="starReviewChoices" name="stars" value="4stars">
+          <label for="starChoice4">4 stars</label>
+
+          <input type="radio" class="starReviewChoices" name="stars" value="5stars">
+          <label for="starChoice5">5 stars</label>
+        </div>
+
+        <button class="submitReviewButton" type="submit">Submit</button>
+
     </form>`
     : '';
 }
@@ -92,6 +87,10 @@ function handleAddBookmarkButtonClicked() {
     STORE.displayBookmarkForm = !STORE.displayBookmarkForm;
     display();
   })
+}
+
+function addNewBookmark() {
+  $('.container').on('change', '.userTextInput', event )
 }
 
 function handlersSetup() {
