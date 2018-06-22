@@ -7,6 +7,7 @@ const STORE = {
     {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5, expandedView: false},
   ],
   displayBookmarkForm: false,
+  displayDropDown: false,
 }
 
 function render() {
@@ -16,7 +17,7 @@ function render() {
           <h2 class="logo">myBookmark</h2>
             <div class="dropdown">
               <button class="dropbtn">Minimum Rating</button>
-                <div id="myDropdown" class="dropdown-content">
+                <div id="myDropdown" class="dropdown-content ${STORE.displayDropDown ? 'show' : ''}">
                   <a class="myDrowpdownText" href="#">1 Star</a>
                   <a class="myDrowpdownText" href="#">2 Star</a>
                   <a class="myDrowpdownText" href="#">3 Star</a>
@@ -37,6 +38,14 @@ function render() {
         ${renderItems()}
       </section>`
 }
+
+function displayDropDownContent() {
+  $('.container').on('click', '.dropbtn', event => {
+    STORE.displayDropDown = !STORE.displayDropDown;
+    display();
+  });
+}
+
 
 function renderAddBookmarkForm() {
   return STORE.displayBookmarkForm ? `
@@ -155,6 +164,7 @@ function handlersSetup() {
   handleExpandViewButtonClicked()
   addNewBookmark();
   removeBookmark();
+  displayDropDownContent()
   display();
 }
 
