@@ -91,9 +91,8 @@ function renderItems() {
 
 function handleExpandViewButtonClicked() {
   $('.container').on('click', '.expandViewButton', event => {
-
-
-    STORE.expandedView = !STORE.expandedView;
+    const itemIndex = $(event.target).closest('div.indivBookmark').data('item-index');
+    STORE.items[itemIndex].expandedView = !STORE.items[itemIndex].expandedView;
     display();
   })
 }
