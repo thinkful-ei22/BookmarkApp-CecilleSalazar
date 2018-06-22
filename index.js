@@ -123,7 +123,7 @@ function addNewBookmark() {
 }
 
 function createBookmark({title, url, description, rating}) {
-  if (false) {
+  if (title.length < 1) {
     throw Error('Title must be at least 1 character!');
   }
   if (false) {
@@ -139,8 +139,6 @@ function createBookmark({title, url, description, rating}) {
     throw Error('Rating must be between 1 - 5!')
   }
 
-
-  }
   STORE.items.push({title, url, description, rating});
 }
 
