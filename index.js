@@ -2,11 +2,12 @@
 
 const STORE = {
   items: [
-    {title: 'Youtube', address: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5},
-    {title: 'Pandora', address: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5},
-    {title: 'NPR', address: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5},
+    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5},
+    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5},
+    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5},
   ],
   displayBookmarkForm: false,
+  expandedView: false,
 }
 
 function render() {
@@ -71,15 +72,34 @@ function renderAddBookmarkForm() {
 }
 
 function renderItems(items) {
-  return `
-    <ul class="bookmarksList">
+  return STORE.expandedView ? `
+      <ul class="bookmarksList">
+        ${items.map(item => `
+          <div class="indivBookmark">
+            <li>${item.title}</li>
+            <li>${item.url}</li>
+            <li>${item.description}</li>
+            <button class="expandView">Expand View</button>
+            <button class="deleteButton" type="submit">Delete Bookmark</button>
+          </div>
+        `).join("\n")}
+      </ul>`
+    : `<ul class="bookmarksList">
       ${items.map(item => `
         <div class="indivBookmark">
           <li>${item.title}</li>
+          <button class="expandViewButton">Expand View</button>
           <button class="deleteButton" type="submit">Delete Bookmark</button>
         </div>
       `).join("\n")}
     </ul>`;
+}
+
+function handleExpandViewButtonClicked() {
+  $('.container').on('click', '.expandViewButton', event => {
+    STORE.expandedView = !STORE.expandedView;
+    display();
+  })
 }
 
 function handleAddBookmarkButtonClicked() {
@@ -107,6 +127,7 @@ function addNewBookmark() {
 function handlersSetup() {
   // handlers go here!
   handleAddBookmarkButtonClicked();
+  handleExpandViewButtonClicked()
   addNewBookmark();
   display();
 }
