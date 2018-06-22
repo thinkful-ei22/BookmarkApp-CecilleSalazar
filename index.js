@@ -2,10 +2,11 @@
 
 const STORE = {
   items: [
-    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5, expandedView: false, hide: false},
-    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5, expandedView: false, hide: false},
-    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 1, expandedView: false, hide: false},
+    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 1, expandedView: false, hide: false},
+    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 2, expandedView: false, hide: false},
+    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 3, expandedView: false, hide: false},
   ],
+  filterByRating: null,
   displayBookmarkForm: false,
   displayDropDown: false,
 }
@@ -15,15 +16,25 @@ function hideByStarRating(ratingNum) {
      item.rating !== ratingNum ? item.hide = true : null
    });
 }
+function showAllItems() {
+  STORE.items.forEach(item => {
+    item.hide = false
+  });
+}
 
-function handleFilterByRating1star() {
-  $('.container').on('click', '.myDropdownText1', event => {
-    hideByStarRating(1);
+function handleFilterByRating() {
+  $('.container').on('click', '.myDropdownText', event => {
+    const num = $(event.target).data('star-rating');
+    if (STORE.filterByRating === num){
+      showAllItems();
+      STORE.filterByRating = null;
+    } else {
+      STORE.filterByRating = num;
+      hideByStarRating(num);
+    }
     display();
   })
 }
-
-
 
 function render() {
   return `
@@ -33,11 +44,11 @@ function render() {
             <div class="dropdown">
               <button class="dropbtn">Minimum Rating</button>
                 <div id="myDropdown" class="dropdown-content ${STORE.displayDropDown ? 'show' : ''}">
-                  <a class="myDropdownText1" href="#">1 Star</a>
-                  <a class="myDropdownText" href="#">2 Star</a>
-                  <a class="myDropdownText" href="#">3 Star</a>
-                  <a class="myDropdownText" href="#">4 Star</a>
-                  <a class="myDropdownText" href="#">5 Star</a>
+                  <a class="myDropdownText" data-star-rating="1" href="#">1 Star</a>
+                  <a class="myDropdownText" data-star-rating="2" href="#">2 Star</a>
+                  <a class="myDropdownText" data-star-rating="3" href="#">3 Star</a>
+                  <a class="myDropdownText" data-star-rating="4" href="#">4 Star</a>
+                  <a class="myDropdownText" data-star-rating="5" href="#">5 Star</a>
                 </div>
             </div>
         </div>
@@ -180,7 +191,7 @@ function handlersSetup() {
   addNewBookmark();
   removeBookmark();
   displayDropDownContent()
-  handleFilterByRating1star()
+  handleFilterByRating()
   display();
 }
 
