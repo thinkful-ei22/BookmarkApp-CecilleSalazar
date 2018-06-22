@@ -145,9 +145,12 @@ function addNewBookmark() {
     const title = $(event.target).find('.userTextInput').val();
     const url = $(event.target).find('.userUrlInput').val();
     const description = $(event.target).find('.userDescriptionInput').val();
-    const rating = $(event.target).find('input:radio[name=stars]:checked').val();
+    const ratingString = $(event.target).find('input:radio[name=stars]:checked').val();
+    const rating = parseInt(ratingString, 10);
+    const expandedView = false;
+    const hide = false;
     try {
-      let newItem = createBookmark({title, url, description, rating})
+      let newItem = createBookmark({title, url, description, rating, expandedView, hide,});
       display();
     }
     catch(error) {
@@ -157,7 +160,7 @@ function addNewBookmark() {
   })
 }
 
-function createBookmark({title, url, description, rating}) {
+function createBookmark({title, url, description, rating, expandedView, hide}) {
   if (title.length < 1) {
     throw Error('Title must be at least 1 character!');
   }
@@ -173,7 +176,7 @@ function createBookmark({title, url, description, rating}) {
     throw Error('Description must be at least 1 character!')
   }
 
-  STORE.items.push({title, url, description, rating});
+  STORE.items.push({title, url, description, rating, expandedView, hide});
 }
 
 function removeBookmark() {
