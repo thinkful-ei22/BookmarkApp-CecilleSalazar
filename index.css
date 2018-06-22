@@ -111,3 +111,12 @@ label {
 }
 
 /*--------------------------Submit a Review Form------------------------------*/
+
+
+/*--------------------------Setup Our Fonts------------------------------*/
+@font-face {
+  font-family: 'Architects Daughter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Architects Daughter Regular'), local('ArchitectsDaughter-Regular'), url(/architectsdaughter.tff) format('truetype');
+}
