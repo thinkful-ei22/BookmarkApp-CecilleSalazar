@@ -126,12 +126,13 @@ function createBookmark({title, url, description, rating}) {
   if (title.length < 1) {
     throw Error('Title must be at least 1 character!');
   }
-  if (false) {
+  if (url.length < 5) {
     throw Error('Url must be more than 4 characters! ')
-      if (false) {
-        throw Error('Url must include protocol (http/https)!')
-      }
   }
+  if (!url.includes("http") || !url.includes("https")) {
+        throw Error('Url must include protocol (http/https)!')
+  }
+
   if (false) {
     throw Error('Description must be at least 1 character!')
   }
