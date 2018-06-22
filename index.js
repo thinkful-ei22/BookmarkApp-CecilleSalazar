@@ -72,32 +72,28 @@ function renderAddBookmarkForm() {
 }
 
 function renderItems() {
-  return STORE.expandedView ? `
+
+  return `
       <ul class="bookmarksList">
         ${STORE.items.map((item, index) => `
           <div class="indivBookmark" data-item-index="${index}">
             <li>${item.title}</li>
-            <li>${item.url}</li>
-            <li>${item.description}</li>
-            <li>${item.rating}</li>
-            <button class="expandView">Expand View</button>
+            ${STORE.expandedView ? `
+              <li>${item.url}</li>
+              <li>${item.description}</li>
+              <li>${item.rating}</li>`
+            : ''}
+            <button class="expandViewButton">Expand View</button>
             <button class="deleteButton" type="submit">Delete Bookmark</button>
           </div>
         `).join("\n")}
-      </ul>`
-    : `<ul class="bookmarksList">
-      ${STORE.items.map((item, index) => `
-        <div class="indivBookmark" data-item-index="${index}">
-          <li>${item.title}</li>
-          <button class="expandViewButton">Expand View</button>
-          <button class="deleteButton" type="submit">Delete Bookmark</button>
-        </div>
-      `).join("\n")}
-    </ul>`;
+      </ul>`;
 }
 
 function handleExpandViewButtonClicked() {
   $('.container').on('click', '.expandViewButton', event => {
+
+
     STORE.expandedView = !STORE.expandedView;
     display();
   })
