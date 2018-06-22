@@ -78,7 +78,7 @@ function renderItems() {
           <div class="indivBookmark" data-item-index="${index}">
             <li>${item.title}</li>
             ${item.expandedView ? `
-              <li>${item.url}</li>
+              <li><a href="${item.url}">Visit Site</a></li>
               <li>${item.description}</li>
               <li>${item.rating}</li>`
             : ''}
@@ -111,12 +111,20 @@ function addNewBookmark() {
     const url = $(event.target).find('.userUrlInput').val();
     const description = $(event.target).find('.userDescriptionInput').val();
     const rating = $(event.target).find('input:radio[name=stars]:checked').val();
-    let newItem = {title, url, description, rating}
+    try {
+      let newItem = createBookmark({title, url, description, rating})
+    }
+    catch(error) {
+      alert(error.message)
+    }
 
-    STORE.items.push(newItem);
     display();
-
   })
+}
+
+function createBookmark({title, url, description, rating}) {
+  throw Error('title too short');
+  STORE.items.push({title, url, description, rating});
 }
 
 function removeBookmark() {
