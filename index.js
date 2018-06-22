@@ -106,12 +106,11 @@ function renderAddBookmarkForm() {
 }
 
 function renderItems() {
-
   return `
       <ul class="bookmarksList">
         ${STORE.items.map((item, index) => `
-          <div class="indivBookmark ${item.hide ? 'hide' : ''}" data-item-index="${index}">
-            <li>${item.title}</li>
+          <div class="indivBookmark ${item.hide ? 'hide' : ''}" data-item-id="${item.id}">
+            <li>${item.title} rating: ${item.rating}</li>
             ${item.expandedView ? `
               <li><a href="${item.url}">Visit Site</a></li>
               <li>${item.desc}</li>
@@ -126,8 +125,14 @@ function renderItems() {
 
 function handleExpandViewButtonClicked() {
   $('.container').on('click', '.expandViewButton', event => {
-    const itemIndex = $(event.target).closest('div.indivBookmark').data('item-index');
-    STORE.items[itemIndex].expandedView = !STORE.items[itemIndex].expandedView;
+    const id = $(event.target).closest('div.indivBookmark').data('item-id');
+    const filteredSTORE = STORE.items.map((item) => {
+      if (item.id === id) {
+        item.expandedView = !item.expandedView;
+      }
+      return item;
+    })
+    STORE.items = filteredSTORE;
     display();
   })
 }
@@ -167,14 +172,13 @@ function createBookmark({title, url, desc, rating, expandedView, hide}) {
   if (url.length < 5) {
     throw Error('Url must be more than 4 characters! ')
   }
-  if (!url.includes("http") || !url.includes("https")) {
+  if (!url.includes("http")) {
     throw Error('Url must include protocol (http/https)!')
   }
   if (desc.length < 1) {
     throw Error('desc must be at least 1 character!')
   }
 api.createBookmark({title, url, desc, rating}, response => {
-  console.log(response);
   response.expandedView = expandedView;
   response.hide = hide;
   STORE.items.push(response);
@@ -182,22 +186,32 @@ api.createBookmark({title, url, desc, rating}, response => {
 })
 
 }
-
 function removeBookmark() {
   $('.container').on('click', '.deleteButton', event => {
-  const itemIndex = $(event.target).closest('div.indivBookmark').data('item-index');
-  STORE.items.splice(itemIndex, 1);
-  display();
+  const id = $(event.target).closest('div.indivBookmark').data('item-id');
+
+    api.removeBookmark(id, response => {
+      //STORE.items.splice(id, 1)
+
+      const filteredSTORE = STORE.items.filter((item) => {
+        if (item.id !== id) {
+        return item;
+        }
+
+      })
+      STORE.items = filteredSTORE;
+
+
+
+      display();
+    })
   })
 }
 
 function initialize() {
   api.getBookmarks((items) => {
-  console.log(items);
   STORE.items = items;
-  console.log(STORE.items);
   display();
-
   });
 }
 

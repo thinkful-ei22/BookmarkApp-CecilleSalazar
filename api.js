@@ -7,7 +7,6 @@ const api = (function () {
 
 
 const createBookmark = function(obj, onSuccess, onError) {
-  console.log(obj);
     const newBookmark = JSON.stringify(obj);
     $.ajax({
       url: BASE_URL + '/bookmarks',
@@ -19,11 +18,20 @@ const createBookmark = function(obj, onSuccess, onError) {
     });
   };
 
+const removeBookmark = function(id, callback) {
+  $.ajax({
+    url: `${BASE_URL}/bookmarks/${id}`,
+    method: 'DELETE',
+    contentType: 'application/json',
+    success: callback,
+  });
+}
 
 
   return {
     getBookmarks,
     createBookmark,
+    removeBookmark,
 
   };
 }());
