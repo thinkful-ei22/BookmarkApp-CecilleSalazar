@@ -35,7 +35,7 @@ function render() {
 
         ${renderAddBookmarkForm()}
 
-        ${renderItems(STORE.items)}
+        ${renderItems()}
       </section>`
 }
 
@@ -71,21 +71,22 @@ function renderAddBookmarkForm() {
     : '';
 }
 
-function renderItems(items) {
+function renderItems() {
   return STORE.expandedView ? `
       <ul class="bookmarksList">
-        ${items.map(item => `
+        ${STORE.items.map(item => `
           <div class="indivBookmark">
             <li>${item.title}</li>
             <li>${item.url}</li>
             <li>${item.description}</li>
+            <li>${item.rating}</li>
             <button class="expandView">Expand View</button>
             <button class="deleteButton" type="submit">Delete Bookmark</button>
           </div>
         `).join("\n")}
       </ul>`
     : `<ul class="bookmarksList">
-      ${items.map(item => `
+      ${STORE.items.map(item => `
         <div class="indivBookmark">
           <li>${item.title}</li>
           <button class="expandViewButton">Expand View</button>
@@ -124,11 +125,20 @@ function addNewBookmark() {
   })
 }
 
+function removeBookmark() {
+  $('.container').on('click', '.deleteButton', event => {
+
+
+
+  })
+}
+
 function handlersSetup() {
   // handlers go here!
   handleAddBookmarkButtonClicked();
   handleExpandViewButtonClicked()
   addNewBookmark();
+  removeBookmark();
   display();
 }
 
