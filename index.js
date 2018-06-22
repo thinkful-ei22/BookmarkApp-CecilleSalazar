@@ -78,9 +78,9 @@ function renderAddBookmarkForm() {
     <form class="addBookmark">
 
       <label for="addBookmark">Add Bookmark</label>
-        <input type="text" class="userTextInput" placeholder="e.g., Youtube">
-        <input type="text" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
-        <input type="text" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
+        <input type="text" name="titleInput" class="userTextInput" placeholder="e.g., Youtube">
+        <input type="text" name="urlInput" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
+        <input type="text" name="descriptionInput" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
 
         <div class="radioButtons">
           <input type="radio" class="starReviewChoices" name="stars" value="1">
@@ -99,7 +99,7 @@ function renderAddBookmarkForm() {
           <label for="starChoice5">5 stars</label>
         </div>
 
-        <button class="submitNewBookmarkButton" type="submit">Submit</button>
+        <button name="submitBookmarkButton" class="submitNewBookmarkButton" type="submit">Submit</button>
 
     </form>`
     : '';
