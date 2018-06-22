@@ -2,12 +2,11 @@
 
 const STORE = {
   items: [
-    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5},
-    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5},
-    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5},
+    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5, expandedView: false},
+    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5, expandedView: false},
+    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5, expandedView: false},
   ],
   displayBookmarkForm: false,
-  expandedView: false,
 }
 
 function render() {
@@ -78,7 +77,7 @@ function renderItems() {
         ${STORE.items.map((item, index) => `
           <div class="indivBookmark" data-item-index="${index}">
             <li>${item.title}</li>
-            ${STORE.expandedView ? `
+            ${item.expandedView ? `
               <li>${item.url}</li>
               <li>${item.description}</li>
               <li>${item.rating}</li>`
