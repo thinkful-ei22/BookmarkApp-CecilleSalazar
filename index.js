@@ -2,9 +2,9 @@
 
 const STORE = {
   items: [
-    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 1, expandedView: false, hide: false},
-    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 2, expandedView: false, hide: false},
-    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 3, expandedView: false, hide: false},
+    {title: 'Youtube', url: 'https://www.youtube.com/', desc: 'My favorite video hosting website.', rating: 1, expandedView: false, hide: false},
+    {title: 'Pandora', url: 'https://www.pandora.com/', desc: 'My favorite online radio website.', rating: 2, expandedView: false, hide: false},
+    {title: 'NPR', url: 'https://www.npr.org/', desc: 'My favorite news website.', rating: 3, expandedView: false, hide: false},
   ],
   filterByRating: null,
   displayBookmarkForm: false,
@@ -80,7 +80,7 @@ function renderAddBookmarkForm() {
       <label for="addBookmark">Add Bookmark</label>
         <input type="text" name="titleInput" class="userTextInput" placeholder="e.g., Youtube">
         <input type="text" name="urlInput" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
-        <input type="text" name="descriptionInput" class="userDescriptionInput" placeholder="My favorite free video hosting service.">
+        <input type="text" name="descInput" class="userdescInput" placeholder="My favorite free video hosting service.">
 
         <div class="radioButtons">
           <input type="radio" class="starReviewChoices" name="stars" value="1">
@@ -114,7 +114,7 @@ function renderItems() {
             <li>${item.title}</li>
             ${item.expandedView ? `
               <li><a href="${item.url}">Visit Site</a></li>
-              <li>${item.description}</li>
+              <li>${item.desc}</li>
               <li>${item.rating}</li>`
             : ''}
             <button class="expandViewButton">Expand View</button>
@@ -144,13 +144,13 @@ function addNewBookmark() {
     event.preventDefault();
     const title = $(event.target).find('.userTextInput').val();
     const url = $(event.target).find('.userUrlInput').val();
-    const description = $(event.target).find('.userDescriptionInput').val();
+    const desc = $(event.target).find('.userdescInput').val();
     const ratingString = $(event.target).find('input:radio[name=stars]:checked').val();
     const rating = parseInt(ratingString, 10);
     const expandedView = false;
     const hide = false;
     try {
-      let newItem = createBookmark({title, url, description, rating, expandedView, hide,});
+      let newItem = createBookmark({title, url, desc, rating, expandedView, hide,});
       display();
     }
     catch(error) {
@@ -160,7 +160,7 @@ function addNewBookmark() {
   })
 }
 
-function createBookmark({title, url, description, rating, expandedView, hide}) {
+function createBookmark({title, url, desc, rating, expandedView, hide}) {
   if (title.length < 1) {
     throw Error('Title must be at least 1 character!');
   }
@@ -170,12 +170,17 @@ function createBookmark({title, url, description, rating, expandedView, hide}) {
   if (!url.includes("http") || !url.includes("https")) {
     throw Error('Url must include protocol (http/https)!')
   }
-
-  if (description.length < 1) {
-    throw Error('Description must be at least 1 character!')
+  if (desc.length < 1) {
+    throw Error('desc must be at least 1 character!')
   }
+api.createBookmark({title, url, desc, rating}, response => {
+  console.log(response);
+  response.expandedView = expandedView;
+  response.hide = hide;
+  STORE.items.push(response);
+  display();
+})
 
-  STORE.items.push({title, url, description, rating, expandedView, hide});
 }
 
 function removeBookmark() {
@@ -186,6 +191,16 @@ function removeBookmark() {
   })
 }
 
+function initialize() {
+  api.getBookmarks((items) => {
+  console.log(items);
+  STORE.items = items;
+  console.log(STORE.items);
+  display();
+
+  });
+}
+
 function handlersSetup() {
   // handlers go here!
   handleAddBookmarkButtonClicked();
@@ -194,14 +209,18 @@ function handlersSetup() {
   removeBookmark();
   displayDropDownContent()
   handleFilterByRating()
-  display();
 }
 
 function display() {
   $('.container').html(render());
 }
 
-$(handlersSetup)
+$(document).ready(function() {
+  handlersSetup();
+  initialize();
+})
+
+
 // For testing only
 window.STORE = STORE;
 window.display = display;
