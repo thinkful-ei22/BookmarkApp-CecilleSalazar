@@ -74,8 +74,8 @@ function renderAddBookmarkForm() {
 function renderItems() {
   return STORE.expandedView ? `
       <ul class="bookmarksList">
-        ${STORE.items.map(item => `
-          <div class="indivBookmark">
+        ${STORE.items.map((item, index) => `
+          <div class="indivBookmark" data-item-index="${index}">
             <li>${item.title}</li>
             <li>${item.url}</li>
             <li>${item.description}</li>
@@ -86,8 +86,8 @@ function renderItems() {
         `).join("\n")}
       </ul>`
     : `<ul class="bookmarksList">
-      ${STORE.items.map(item => `
-        <div class="indivBookmark">
+      ${STORE.items.map((item, index) => `
+        <div class="indivBookmark" data-item-index="${index}">
           <li>${item.title}</li>
           <button class="expandViewButton">Expand View</button>
           <button class="deleteButton" type="submit">Delete Bookmark</button>
