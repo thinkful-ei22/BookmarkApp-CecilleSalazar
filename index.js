@@ -2,9 +2,9 @@
 
 const STORE = {
   items: [
-    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5, expandedView: false},
-    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5, expandedView: false},
-    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 5, expandedView: false},
+    {title: 'Youtube', url: 'https://www.youtube.com/', description: 'My favorite video hosting website.', rating: 5, expandedView: false, hide: false},
+    {title: 'Pandora', url: 'https://www.pandora.com/', description: 'My favorite online radio website.', rating: 5, expandedView: false, hide: false},
+    {title: 'NPR', url: 'https://www.npr.org/', description: 'My favorite news website.', rating: 1, expandedView: false, hide: false},
   ],
   displayBookmarkForm: false,
   displayDropDown: false,
@@ -84,7 +84,7 @@ function renderItems() {
   return `
       <ul class="bookmarksList">
         ${STORE.items.map((item, index) => `
-          <div class="indivBookmark" data-item-index="${index}">
+          <div class="indivBookmark ${item.hide ? 'hide' : ''}" data-item-index="${index}">
             <li>${item.title}</li>
             ${item.expandedView ? `
               <li><a href="${item.url}">Visit Site</a></li>
