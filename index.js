@@ -10,6 +10,21 @@ const STORE = {
   displayDropDown: false,
 }
 
+function hideByStarRating(ratingNum) {
+   STORE.items.forEach(item => {
+     item.rating !== ratingNum ? item.hide = true : null
+   });
+}
+
+function handleFilterByRating1star() {
+  $('.container').on('click', '.myDropdownText1', event => {
+    hideByStarRating(1);
+    display();
+  })
+}
+
+
+
 function render() {
   return `
       <section class="navContent">
@@ -18,11 +33,11 @@ function render() {
             <div class="dropdown">
               <button class="dropbtn">Minimum Rating</button>
                 <div id="myDropdown" class="dropdown-content ${STORE.displayDropDown ? 'show' : ''}">
-                  <a class="myDrowpdownText" href="#">1 Star</a>
-                  <a class="myDrowpdownText" href="#">2 Star</a>
-                  <a class="myDrowpdownText" href="#">3 Star</a>
-                  <a class="myDrowpdownText" href="#">4 Star</a>
-                  <a class="myDrowpdownText" href="#">5 Star</a>
+                  <a class="myDropdownText1" href="#">1 Star</a>
+                  <a class="myDropdownText" href="#">2 Star</a>
+                  <a class="myDropdownText" href="#">3 Star</a>
+                  <a class="myDropdownText" href="#">4 Star</a>
+                  <a class="myDropdownText" href="#">5 Star</a>
                 </div>
             </div>
         </div>
@@ -165,6 +180,7 @@ function handlersSetup() {
   addNewBookmark();
   removeBookmark();
   displayDropDownContent()
+  handleFilterByRating1star()
   display();
 }
 
