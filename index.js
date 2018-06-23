@@ -56,7 +56,7 @@ function render() {
 
       <section class="createBookmark">
         <div class="addBookmarkButton">
-          <button>Add Bookmark</button>
+          <button class="actualBookmarkButton">Add Bookmark</button>
         </div>
 
         ${renderAddBookmarkForm()}
@@ -223,6 +223,7 @@ function handlersSetup() {
   removeBookmark();
   displayDropDownContent()
   handleFilterByRating()
+
 }
 
 function display() {

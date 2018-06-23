@@ -115,8 +115,38 @@ label {
 
 /*--------------------------Submit a Review Form------------------------------*/
 
+.addBookmarkButton {
+  font-family: 'Architects Daughter';
+  font-weight: bold;
+
+}
+
+.actualBookmarkButton {
+  border-radius: 3px;
+  border: 2px solid black;
+}
+
+.indivBookmark {
+  font-family: 'Architects Daughter';
+  border: 1px solid black;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 3px;
+}
+
+.expandViewButton {
+  border-radius: 3px;
+  border: 2px solid black;
+}
+
+.deleteButton {
+  border-radius: 3px;
+  border: 2px solid black;
+  margin: 2px 2px 2px 2px;
+}
 
 /*--------------------------Setup Our Fonts------------------------------*/
+
 @font-face {
   font-family: 'Architects Daughter';
   font-style: normal;
