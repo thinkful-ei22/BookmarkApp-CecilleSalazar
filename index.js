@@ -110,11 +110,11 @@ function renderItems() {
       <ul class="bookmarksList">
         ${STORE.items.map((item, index) => `
           <div class="indivBookmark ${item.hide ? 'hide' : ''}" data-item-id="${item.id}">
-            <li>${item.title} rating: ${item.rating}</li>
+            <li>${item.title} ~ Rating: ${item.rating} stars</li>
             ${item.expandedView ? `
               <li><a href="${item.url}">Visit Site</a></li>
-              <li>${item.desc}</li>
-              <li>${item.rating}</li>`
+              <li>Description: ${item.desc}</li>
+              <li>Rating: ${item.rating} stars</li>`
             : ''}
             <button class="expandViewButton">Expand View</button>
             <button class="deleteButton" type="submit">Delete Bookmark</button>
