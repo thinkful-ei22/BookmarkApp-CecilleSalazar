@@ -191,18 +191,12 @@ function removeBookmark() {
   const id = $(event.target).closest('div.indivBookmark').data('item-id');
 
     api.removeBookmark(id, response => {
-      //STORE.items.splice(id, 1)
-
       const filteredSTORE = STORE.items.filter((item) => {
         if (item.id !== id) {
         return item;
         }
-
       })
       STORE.items = filteredSTORE;
-
-
-
       display();
     })
   })
