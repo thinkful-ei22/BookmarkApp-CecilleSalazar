@@ -19,7 +19,7 @@ ul {
   display: inline-block;
   color: white;
   margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .dropbtn {
@@ -36,7 +36,6 @@ ul {
     margin-right: 10px;
 }
 
-/* Dropdown button on hover & focus */
 .dropbtn:hover, .dropbtn:focus {
     background-color: gray;
 }
@@ -63,9 +62,13 @@ ul {
     display: block;
 }
 
-.dropdown-content a:hover {background-color: gray}
+.dropdown-content a:hover {
+  background-color: gray;
+}
 
-.show {display:block;}
+.show {
+  display:block;
+}
 
 .hide {
   display: none;
@@ -83,29 +86,37 @@ ul {
 }
 
 label {
+  font-family: 'Architects Daughter';
   margin-left: 20px;
   margin-bottom: 20px;
-  display: block;
+  display: inline-block;
 }
 
 .userTextInput {
+  font-family: 'Architects Daughter';
   margin-left: 20px;
   display: inline-block;
   width: 30%;
+  border: 2px solid black;
 }
 
 .userUrlInput {
+  font-family: 'Architects Daughter';
   margin-left: 20px;
   display: inline-block;
   width: 30%;
+  border: 2px solid black;
 }
 
 .userdescInput {
+  font-family: 'Architects Daughter';
   margin-left: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 63.5%;
   height: 200px;
   display: inline-block;
+  border: 2px solid black;
 }
 
 /*--------------------------Submit a Review Form------------------------------*/
@@ -152,6 +163,22 @@ label {
 .indivBookmarkDesc {
   padding-left: 10px;
   padding-bottom: 10px;
+}
+
+.submitNewBookmarkButton {
+  font-family: 'Architects Daughter';
+  margin-left: 20px;
+  border: 2px solid black;
+  border-radius: 3px;
+}
+
+.starReviewChoices {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+placeholder {
+  font-family: 'Architects Daughter';
 }
 
 /*--------------------------Setup Our Fonts------------------------------*/

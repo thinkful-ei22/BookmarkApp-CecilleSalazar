@@ -13,12 +13,13 @@ const STORE = {
 
 function hideByStarRating(ratingNum) {
    STORE.items.forEach(item => {
-     item.rating !== ratingNum ? item.hide = true : null
+     item.rating !== ratingNum ? item.hide = true : null;
    });
 }
+
 function showAllItems() {
   STORE.items.forEach(item => {
-    item.hide = false
+    item.hide = false;
   });
 }
 
@@ -62,6 +63,7 @@ function render() {
         ${renderAddBookmarkForm()}
 
         ${renderItems()}
+
       </section>`
 }
 
@@ -72,15 +74,13 @@ function displayDropDownContent() {
   });
 }
 
-
 function renderAddBookmarkForm() {
   return STORE.displayBookmarkForm ? `
     <form class="addBookmark">
 
-      <label for="addBookmark">Add Bookmark</label>
-        <input type="text" name="titleInput" class="userTextInput" placeholder="e.g., Youtube">
-        <input type="text" name="urlInput" class="userUrlInput" placeholder="e.g., https://www.youtube.com/">
-        <input type="text" name="descInput" class="userdescInput" placeholder="My favorite free video hosting service.">
+        <input type="text" name="titleInput" class="userTextInput" placeholder="e.g., IGN">
+        <input type="text" name="urlInput" class="userUrlInput" placeholder="e.g., https://www.ign.com/">
+        <input type="text" name="descInput" class="userdescInput" placeholder="My favorite free video game resource.">
 
         <div class="radioButtons">
           <input type="radio" class="starReviewChoices" name="stars" value="1">
@@ -158,37 +158,35 @@ function addNewBookmark() {
       display();
     }
     catch(error) {
-      alert(error.message)
+      alert(error.message);
     }
-
   })
 }
 
 function createBookmark({title, url, desc, rating, expandedView, hide}) {
-  if (title.length < 1) {
-    throw Error('Title must be at least 1 character!');
-  }
-  if (url.length < 5) {
-    throw Error('Url must be more than 4 characters! ')
-  }
-  if (!url.includes("http")) {
-    throw Error('Url must include protocol (http/https)!')
-  }
-  if (desc.length < 1) {
-    throw Error('desc must be at least 1 character!')
-  }
-api.createBookmark({title, url, desc, rating}, response => {
-  response.expandedView = expandedView;
-  response.hide = hide;
-  STORE.items.push(response);
-  display();
-})
-
+    if (title.length < 1) {
+      throw Error('Title must be at least 1 character!');
+    }
+    if (url.length < 5) {
+      throw Error('Url must be more than 4 characters! ');
+    }
+    if (!url.includes("http")) {
+      throw Error('Url must include protocol (http/https)!');
+    }
+    if (desc.length < 1) {
+      throw Error('desc must be at least 1 character!');
+    }
+  api.createBookmark({title, url, desc, rating}, response => {
+    response.expandedView = expandedView;
+    response.hide = hide;
+    STORE.items.push(response);
+    display();
+  })
 }
+
 function removeBookmark() {
   $('.container').on('click', '.deleteButton', event => {
   const id = $(event.target).closest('div.indivBookmark').data('item-id');
-
     api.removeBookmark(id, response => {
       const filteredSTORE = STORE.items.filter((item) => {
         if (item.id !== id) {
@@ -209,14 +207,12 @@ function initialize() {
 }
 
 function handlersSetup() {
-  // handlers go here!
   handleAddBookmarkButtonClicked();
   handleExpandViewButtonClicked()
   addNewBookmark();
   removeBookmark();
-  displayDropDownContent()
-  handleFilterByRating()
-
+  displayDropDownContent();
+  handleFilterByRating();
 }
 
 function display() {
@@ -227,7 +223,6 @@ $(document).ready(function() {
   handlersSetup();
   initialize();
 })
-
 
 // For testing only
 window.STORE = STORE;
