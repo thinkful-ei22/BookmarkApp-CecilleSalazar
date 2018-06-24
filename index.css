@@ -141,6 +141,19 @@ label {
   margin: 5px 5px 5px 5px;
 }
 
+.indivBookmarkTitle {
+  font-size: 20px;
+}
+
+.indivBookmarkUrl {
+  padding-left: 10px;
+}
+
+.indivBookmarkDesc {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
 /*--------------------------Setup Our Fonts------------------------------*/
 
 @font-face {
